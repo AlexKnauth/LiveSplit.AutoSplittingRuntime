@@ -3,7 +3,7 @@ use crate::{settings_map::SettingsMap, user_settings::UserSettings};
 #[cfg(target_pointer_width = "64")]
 use crate::{log, setting_value::SettingValue, str, CTimer};
 #[cfg(target_pointer_width = "64")]
-use livesplit_auto_splitting::Config;
+use livesplit_auto_splitting::{Config, ConfigSettings};
 #[cfg(target_pointer_width = "64")]
 use std::{fs, sync::Arc};
 
@@ -51,7 +51,7 @@ pub unsafe extern "C" fn Runtime_new(
         };
 
         let mut config = Config::default();
-        config.settings_map = _settings_map.map(|settings_map| *settings_map);
+        config.settings = _settings_map.map(|settings_map| *settings_map).map_or(ConfigSettings::None, ConfigSettings::Map);
 
         match livesplit_auto_splitting::Runtime::new(
             &file,
