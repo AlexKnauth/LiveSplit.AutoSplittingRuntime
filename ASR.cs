@@ -46,6 +46,7 @@ namespace LiveSplit.AutoSplittingRuntime
         public Runtime(
             string path,
             SettingsMap settingsMap,
+            string legacyXML,
             StateDelegate state,
             Action start,
             Action split,
@@ -66,6 +67,7 @@ namespace LiveSplit.AutoSplittingRuntime
             this.ptr = ASRNative.Runtime_new(
                 path,
                 settingsMapPtr,
+                legacyXML,
                 state,
                 start,
                 split,
@@ -649,6 +651,7 @@ namespace LiveSplit.AutoSplittingRuntime
         public static extern IntPtr Runtime_new(
             ASRString path,
             IntPtr settings_map,
+            ASRString legacyXML,
             StateDelegate state,
             Action start,
             Action split,
