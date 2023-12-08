@@ -58,7 +58,7 @@ namespace LiveSplit.AutoSplittingRuntime
             this.txtScriptPath.DataBindings.Add("Text", this, "ScriptPath", false,
                 DataSourceUpdateMode.OnPropertyChanged);
 
-            legacyXML = model.CurrentState.Run.AutoSplitterSettings.InnerXML;
+            legacyXML = model.CurrentState.Run.AutoSplitterSettings.InnerXml;
 
             getState = () =>
             {
