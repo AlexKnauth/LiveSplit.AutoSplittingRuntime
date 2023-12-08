@@ -31,6 +31,8 @@ namespace LiveSplit.AutoSplittingRuntime
         public SettingsMap previousSettings = null;
         public UserSettings previousUserSettings = null;
 
+        private readonly string legacyXML;
+
         private static readonly LogDelegate log = (messagePtr, messageLen) =>
         {
             var message = ASRString.FromPtrLen(messagePtr, messageLen);
@@ -55,6 +57,8 @@ namespace LiveSplit.AutoSplittingRuntime
 
             this.txtScriptPath.DataBindings.Add("Text", this, "ScriptPath", false,
                 DataSourceUpdateMode.OnPropertyChanged);
+
+            legacyXML = model.CurrentState.Run.AutoSplitterSettings.InnerXML;
 
             getState = () =>
             {
@@ -103,6 +107,7 @@ namespace LiveSplit.AutoSplittingRuntime
                     runtime = new Runtime(
                         ScriptPath,
                         settingsMap,
+                        legacyXML,
                         getState,
                         start,
                         split,

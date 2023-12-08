@@ -21,6 +21,7 @@ pub type Runtime = ();
 pub unsafe extern "C" fn Runtime_new(
     _path_ptr: *const u8,
     _settings_map: Option<Box<SettingsMap>>,
+    _legacy_xml: *const u8,
     _state: unsafe extern "C" fn() -> i32,
     _start: unsafe extern "C" fn(),
     _split: unsafe extern "C" fn(),
@@ -51,7 +52,7 @@ pub unsafe extern "C" fn Runtime_new(
         };
 
         let mut config = Config::default();
-        config.settings_map = _settings_map.map(|settings_map| *settings_map);
+        config.settings_map = config_settings_map(_settings_map, _legacy_xml);
 
         match livesplit_auto_splitting::Runtime::new(
             &file,
@@ -213,4 +214,21 @@ pub extern "C" fn Runtime_are_settings_changed(
     }
     #[cfg(not(target_pointer_width = "64"))]
     false
+}
+
+#[cfg(target_pointer_width = "64")]
+fn config_settings_map(_settings_map: Option<Box<SettingsMap>>, _legacy_xml: *const u8) -> Option<SettingsMap> {
+    if let Some(settings_map) = _settings_map {
+        let m = *settings_map;
+        if !m.is_empty() {
+            return Some(m);
+        }
+    }
+    let legacy_xml = unsafe { str(_legacy_xml) }.trim();
+    if !legacy_xml.is_empty() {
+        let mut m = SettingsMap::new();
+        m.insert("legacy_raw_xml".into(), livesplit_auto_splitting::settings::Value::String(legacy_xml.into()));
+        return Some(m);
+    }
+    None
 }
