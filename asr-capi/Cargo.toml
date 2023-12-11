@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [target.'cfg(target_pointer_width = "64")'.dependencies]
-livesplit-auto-splitting = { git = "https://github.com/LiveSplit/livesplit-core" }
+livesplit-auto-splitting = { git = "https://github.com/AlexKnauth/livesplit-core", branch = "file-selection" }
 smallstr = { version = "0.3.0", features = ["union"] }
 anyhow = "1.0.75"
 

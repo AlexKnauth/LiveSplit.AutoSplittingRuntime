@@ -650,7 +650,7 @@ checksum = "c4cd1a83af159aa67994778be9070f0ae1bd732942279cabb14f86f986a21456"
 [[package]]
 name = "livesplit-auto-splitting"
 version = "0.1.0"
-source = "git+https://github.com/LiveSplit/livesplit-core#5dd0b3f1fbd7db0c6e1e001833e28256de316088"
+source = "git+https://github.com/AlexKnauth/livesplit-core?branch=file-selection#06a47cb1cc4fbfb7537e1d3335503d7381c8a749"
 dependencies = [
  "anyhow",
  "async-trait",
