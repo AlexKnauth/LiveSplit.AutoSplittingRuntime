@@ -158,7 +158,7 @@ pub extern "C" fn path_to_wasi(original_path: *const u8) -> *const u8 {
     output_str("")
 }
 
-/// Translates from a path accessible through the WAS
+/// Translates from a path accessible through the WASI
 /// file system to a path accessible outside that,
 /// so a WASI path of `/mnt/c/foo/bar.exe` would
 /// be translated on Windows to `C:\foo\bar.exe`.
