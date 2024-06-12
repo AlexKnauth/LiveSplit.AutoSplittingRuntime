@@ -25,6 +25,7 @@ pub unsafe extern "C" fn Runtime_new(
     _path_ptr: *const u8,
     _settings_map: Option<Box<SettingsMap>>,
     _state: unsafe extern "C" fn() -> i32,
+    _index: unsafe extern "C" fn() -> i32,
     _start: unsafe extern "C" fn(),
     _split: unsafe extern "C" fn(),
     _skip_split: unsafe extern "C" fn(),
@@ -62,6 +63,7 @@ pub unsafe extern "C" fn Runtime_new(
                     .instantiate(
                         CTimer {
                             state: _state,
+                            index: _index,
                             start: _start,
                             split: _split,
                             skip_split: _skip_split,
