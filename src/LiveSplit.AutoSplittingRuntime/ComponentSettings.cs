@@ -7,6 +7,7 @@ using System.IO;
 using LiveSplit.Options;
 using LiveSplit.Model;
 using System.Globalization;
+using System.Dynamic;
 
 namespace LiveSplit.AutoSplittingRuntime
 {
@@ -39,6 +40,7 @@ namespace LiveSplit.AutoSplittingRuntime
         };
 
         private readonly StateDelegate getState;
+        private readonly IndexDelegate getIndex;
         private readonly Action start;
         private readonly Action split;
         private readonly Action skipSplit;
@@ -68,6 +70,7 @@ namespace LiveSplit.AutoSplittingRuntime
                 }
                 return 0;
             };
+            getIndex = () => model.CurrentState.CurrentSplitIndex;
             start = () => model.Start();
             split = () => model.Split();
             skipSplit = () => model.SkipSplit();
@@ -108,6 +111,7 @@ namespace LiveSplit.AutoSplittingRuntime
                         ScriptPath,
                         settingsMap,
                         getState,
+                        getIndex,
                         start,
                         split,
                         skipSplit,

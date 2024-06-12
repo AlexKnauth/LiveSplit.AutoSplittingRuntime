@@ -47,6 +47,7 @@ namespace LiveSplit.AutoSplittingRuntime
             string path,
             SettingsMap settingsMap,
             StateDelegate state,
+            IndexDelegate index,
             Action start,
             Action split,
             Action skipSplit,
@@ -67,6 +68,7 @@ namespace LiveSplit.AutoSplittingRuntime
                 path,
                 settingsMapPtr,
                 state,
+                index,
                 start,
                 split,
                 skipSplit,
@@ -666,6 +668,7 @@ namespace LiveSplit.AutoSplittingRuntime
     }
 
     public delegate int StateDelegate();
+    public delegate int IndexDelegate();
     public delegate void SetGameTimeDelegate(long gameTime);
     public delegate void LogDelegate(IntPtr messagePtr, UIntPtr messageLen);
 
@@ -676,6 +679,7 @@ namespace LiveSplit.AutoSplittingRuntime
             ASRString path,
             IntPtr settings_map,
             StateDelegate state,
+            IndexDelegate index,
             Action start,
             Action split,
             Action skipSplit,
